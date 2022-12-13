@@ -1,8 +1,8 @@
-import { initializeApp } from "firebase/app";
-import { getAuth , signInWithPopup ,GoogleAuthProvider} from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
+import firebase from 'firebase/app';
+import 'firebase/firestore';
+import 'firebase/auth';
 
-const firebaseConfig = {
+const config = {
   apiKey: "AIzaSyCb-qcD_27d7pdtx-CWzXiuQF7ezBbfPZI",
   authDomain: "farouk-e.firebaseapp.com",
   projectId: "farouk-e",
@@ -12,15 +12,13 @@ const firebaseConfig = {
   measurementId: "G-C8PCCK9LH1"
 };
 
-const app = initializeApp(firebaseConfig);
+firebase.initializeApp(config);
 
+export const auth = firebase.auth();
+export const firestore = firebase.firestore();
 
-
-export const auth = getAuth();
-export const firestore = getFirestore();
-
-const provider = new GoogleAuthProvider();
+const provider = new firebase.auth.GoogleAuthProvider();
 provider.setCustomParameters({ prompt: 'select_account' });
 export const signInWithGoogle = () => auth.signInWithPopup(provider);
 
-export default app;
+export default firebase;
